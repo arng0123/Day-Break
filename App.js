@@ -20,17 +20,6 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function TimerScreen() {
-
-return (
-  <View>
-    <Timer/>
-  </View>
-)
-
-}//end TimerScreen function
-
-
 
 const Stack = createStackNavigator();
 
@@ -41,7 +30,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="timer" component={TimerScreen} />
+        <Stack.Screen name="timer" component={Timer} />
      </Stack.Navigator>
     </NavigationContainer>
   );

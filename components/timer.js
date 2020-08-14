@@ -1,8 +1,11 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import {Animated,Text,View,Alert,Button } from 'react-native';
+import {Text,View,Alert } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import * as WebBrowser from 'expo-web-browser';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const renderTime = ({ remainingTime }) => {
@@ -24,6 +27,7 @@ const renderTime = ({ remainingTime }) => {
 
   };
 
+  
 
 
 export default function Timer(props){
@@ -33,6 +37,7 @@ console.log(props)
     const[restart,setRestart] = useState(false)
 
 
+    const navigation = useNavigation();
 //return for render
     return (
         <View>
@@ -51,15 +56,19 @@ console.log(props)
                         "Want to take a break?", 
                         [
                             {text:"YES", 
-                             onPress:()=>console.log('YES BUTTON') //where it should reroute to Spotify API
+                             onPress:()=>{
+                                 console.log('YES BUTTON')
+                                 WebBrowser.openBrowserAsync('https:/google.com')
+                                } //where it should reroute to Spotify API
                          }, 
                              {text:'NO',
-                             onPress: ()=> {console.log('NO BUTTON'),setRestart(true)}} //Hitting the timer but not re-rendering to restart
+                             onPress: ()=> {console.log('NO BUTTON'), navigation.goBack()},
+                             style:"cancel"} //Navigates back to home screen to reset the timer
                         ],
                         { cancelable: false }
                     )
+
                 }}
-                // onComplete={() => [true, 1000]}
             >
                 {renderTime}
 
