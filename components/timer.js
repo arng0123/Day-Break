@@ -1,16 +1,19 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import {Animated,Text,View,Alert } from 'react-native';
+import {Animated,Text,View,Alert,Button } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+
 
 const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0) {
-      return (
-        alert("TIMES UP")
-      )
-    }
-  
+        return (
+            <Text >
+            <Text >Time's up!</Text>
+          </Text>
+        )
+      } 
+
     return (
       <Text >
         <Text >Remaining {"\n"}</Text>
@@ -18,16 +21,19 @@ const renderTime = ({ remainingTime }) => {
         <Text >seconds {"\n"}</Text>
       </Text>
     );
+
   };
 
 
-// functional component that takes state from the app.js first screen render
 
-export default function Timer(){
+export default function Timer(props){
 
-    const[time,setTime] = useState(10)
+console.log(props)
+    const[time,setTime] = useState(5)
+    const[restart,setRestart] = useState(false)
 
 
+//return for render
     return (
         <View>
             <Text>You still got work to do...</Text>
@@ -39,15 +45,26 @@ export default function Timer(){
                 ['#F7B801', 0.4],
                 ['#A30000', 0.2],
                 ]}
+                onComplete = {() => {
+                    Alert.alert(
+                        "Time's Up",
+                        "Want to take a break?", 
+                        [
+                            {text:"YES", 
+                             onPress:()=>console.log('YES BUTTON') //where it should reroute to Spotify API
+                         }, 
+                             {text:'NO',
+                             onPress: ()=> {console.log('NO BUTTON'),setRestart(true)}} //Hitting the timer but not re-rendering to restart
+                        ],
+                        { cancelable: false }
+                    )
+                }}
+                // onComplete={() => [true, 1000]}
             >
                 {renderTime}
-                {/* {({ remainingTime, animatedColor }) => (
-                <Animated.Text style={{ color: animatedColor }}>
-                    {remainingTime}
-                </Animated.Text>
-                )} */}
-            </CountdownCircleTimer> 
 
+            </CountdownCircleTimer> 
+            
     </View>
     )
 }
