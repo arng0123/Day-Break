@@ -20,7 +20,7 @@ function HomeScreen({ navigation }) {
     style ={styles.background}
     >
       <View style={styles.container}>
-      <Image style ={styles.logo} source={require("./app/assets/Logo_Spotabreak.png")}/>
+      <Image style ={styles.logo} source={require("./app/assets/Logo_DayBreak.png")}/>
         <Text style = {styles.text}>How long will it be until your next break?</Text>
       
         <Formik
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logo:{
-    width: 250,
-    height: 250,
+    width: 275,
+    height: 275,
     position: "absolute",
     top: 10
   }, 
