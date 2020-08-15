@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
 import {Formik} from 'formik'
+import ArticleScreen from './app/screens/ArticleScreen';
 
 
 const image = {uri:"https://cdn-0.preppywallpapers.com/wp-content/uploads/2018/08/Pastel-iPhone-Wallpaper-by-PreppyWallpapers.png"}
@@ -32,6 +33,7 @@ function HomeScreen({ navigation }) {
                   placeholder = "ENTER MINUTES"
                   onChangeText={handleChange('minutes')}
                   value={values.mintues}
+                  style = {styles.input}
                 />
                 <Button 
                   onPress={
@@ -42,14 +44,6 @@ function HomeScreen({ navigation }) {
               </View>
             )}
          </Formik>
-
-
-        {/* <Button
-          style={styles.container}
-          title="START NOW"
-          onPress={() => navigation.navigate('timer')}
-        /> */}
-
       </View>
     </ImageBackground>
   );
@@ -66,6 +60,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="timer" component={TimerScreen} />
+        <Stack.Screen name='articles' component={ArticleScreen}/>
      </Stack.Navigator>
     </NavigationContainer>
     // <WelcomeScreen/>
@@ -81,9 +76,9 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: '#16db65',
+    color: '#16db65',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
   },
   background: {
     flex:1,
@@ -97,6 +92,15 @@ const styles = StyleSheet.create({
     top: 10
   }, 
   text:{
-    fontSize:20
+    fontSize:20,
+    fontFamily:'Verdana',
+    justifyContent:"center", 
+    textAlign: "center"
+  }, 
+  input:{
+    width:200,
+    height:50, 
+    fontSize:15,
+    textAlign:"center",
   }
 });

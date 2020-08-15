@@ -1,48 +1,54 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import {Text,View,Alert, StyleSheet} from 'react-native';
+import {Text,View,Alert, StyleSheet,ImageBackground} from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import * as WebBrowser from 'expo-web-browser';
 import { useNavigation } from '@react-navigation/native';
-
+import ArticleScreen from "./ArticleScreen"
 
 
 const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0) {
         return (
-            <Text >
+            <Text style={styles.innerClockText}>
             <Text >Time's up!</Text>
           </Text>
         )
       } 
 
     return (
-      <Text >
+      <Text style={styles.innerClockText}>
         <Text >Remaining {"\n"}</Text>
-        <Text >{remainingTime} {"\n"}</Text>
-        <Text >seconds {"\n"}</Text>
+        <Text >{Math.round(remainingTime/60)} {"\n"}</Text>
+        <Text >minutes {"\n"}</Text>
       </Text>
     );
 
   };
 
-  
+const image = {uri:"https://i.pinimg.com/originals/e9/aa/69/e9aa6982e02fef615258e1fa083cfd34.png"}
+
 
 
 export default function Timer(props){
 
 console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
-    const[time,setTime] = useState(Number(props["route"]["params"]["time"]["minutes"]))  //THIS IS IN SECONDS *60 to get minutes
+    const[time,setTime] = useState(Number(props["route"]["params"]["time"]["minutes"]*60))  //THIS IS IN SECONDS *60 to get minutes
     const[restart,setRestart] = useState(false)
 
-
+    
     const navigation = useNavigation();
 //return for render
     return (
+      <ImageBackground
+      source ={image}
+      style ={styles.background}
+      >
+        <Text style={styles.clockText}>You're almost there!</Text>
         <View style={styles.container}>
-            <Text>You still got work to do...</Text>
             <CountdownCircleTimer
+                size = {300}
                 isPlaying
                 duration={time}
                 colors={[
@@ -57,12 +63,16 @@ console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
                         [
                             {text:"YES", 
                              onPress:()=>{
-                                 console.log('YES BUTTON')
-                                 WebBrowser.openBrowserAsync('https:/google.com')
+                                 console.log('YES BUTTON'),
+                                //  WebBrowser.openBrowserAsync('https:/google.com')
+                                 navigation.navigate('articles')
                                 } //where it should reroute to Spotify API
                          }, 
                              {text:'NO',
-                             onPress: ()=> {console.log('NO BUTTON'), navigation.goBack()},
+                             onPress: ()=> {
+                              console.log('NO BUTTON'), 
+                              navigation.goBack()
+                              },
                              style:"cancel"} //Navigates back to home screen to reset the timer
                         ],
                         { cancelable: false }
@@ -75,6 +85,7 @@ console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
             </CountdownCircleTimer> 
             
     </View>
+    </ImageBackground>  
     )
 }
 
@@ -84,8 +95,22 @@ console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      fontFamily:'Verdana'
     },
+    clockText: {
+      alignItems: "center", 
+      fontSize: 40,
+      top:60
+    },
+    innerClockText: {
+      alignItems: "center", 
+      fontSize: 20,
+    },
+    background: {
+      flex:1,
+      justifyContent: 'flex-end',
+      alignItems: 'center'
+    }
   });
