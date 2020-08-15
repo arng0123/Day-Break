@@ -1,7 +1,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import {Text,View,Alert } from 'react-native';
+import {Text,View,Alert, StyleSheet} from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import * as WebBrowser from 'expo-web-browser';
 import { useNavigation } from '@react-navigation/native';
@@ -40,7 +40,7 @@ console.log(props)
     const navigation = useNavigation();
 //return for render
     return (
-        <View>
+        <View style={styles.container}>
             <Text>You still got work to do...</Text>
             <CountdownCircleTimer
                 isPlaying
@@ -81,11 +81,11 @@ console.log(props)
 
 
 
-// const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       backgroundColor: '#fff',
-//       alignItems: 'center',
-//       justifyContent: 'center',
-//     },
-//   });
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });

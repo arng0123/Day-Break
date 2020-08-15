@@ -10,9 +10,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
       <Text>Are you ready to get to work today?</Text>
       <Button
+        style={styles.container}
         title="LET'S DO IT"
         onPress={() => navigation.navigate('timer')}
       />
@@ -43,4 +44,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  button: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
