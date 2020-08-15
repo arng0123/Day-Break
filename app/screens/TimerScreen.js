@@ -32,8 +32,8 @@ const renderTime = ({ remainingTime }) => {
 
 export default function Timer(props){
 
-console.log(props)
-    const[time,setTime] = useState(5)
+console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
+    const[time,setTime] = useState(Number(props["route"]["params"]["time"]["minutes"]))  //THIS IS IN SECONDS *60 to get minutes
     const[restart,setRestart] = useState(false)
 
 
