@@ -1,1 +1,0 @@
-//functional component that should render 1 button that will restart the Timer component 

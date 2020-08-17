@@ -2,12 +2,16 @@ import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Button, Alert, Animated, ImageBackground,Image } from 'react-native';
-import TimerScreen from "./app/screens/TimerScreen"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TextInput } from 'react-native-gesture-handler';
 import {Formik} from 'formik'
-import ArticleScreen from './app/screens/ArticleScreen';
+
+//Screen imports
+import TimerScreen from "./app/screens/TimerScreen"
+import ArticleScreen from './app/screens/ArticleScreen'
+import YouTubeScreen from'./app/screens/YouTubeScreen'
+import ContentSelector from "./app/screens/ContentSelector"
 
 
 const image = {uri:"https://cdn-0.preppywallpapers.com/wp-content/uploads/2018/08/Pastel-iPhone-Wallpaper-by-PreppyWallpapers.png"}
@@ -58,12 +62,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
+        {/* for testing should go to "Home" */}
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="timer" component={TimerScreen} />
+        <Stack.Screen name="selector" component={ContentSelector} />
         <Stack.Screen name='articles' component={ArticleScreen}/>
+        <Stack.Screen name='youtube' component={YouTubeScreen}/>  
      </Stack.Navigator>
     </NavigationContainer>
-    // <WelcomeScreen/>
   );
 }
 

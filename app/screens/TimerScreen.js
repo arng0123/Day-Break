@@ -5,7 +5,6 @@ import {Text,View,Alert, StyleSheet,ImageBackground} from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import * as WebBrowser from 'expo-web-browser';
 import { useNavigation } from '@react-navigation/native';
-import ArticleScreen from "./ArticleScreen"
 
 
 const renderTime = ({ remainingTime }) => {
@@ -32,13 +31,12 @@ const image = {uri:"https://i.pinimg.com/originals/e9/aa/69/e9aa6982e02fef615258
 
 
 export default function Timer(props){
-
-console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
     const[time,setTime] = useState(Number(props["route"]["params"]["time"]["minutes"]*60))  //THIS IS IN SECONDS *60 to get minutes
     const[restart,setRestart] = useState(false)
 
     
     const navigation = useNavigation();
+
 //return for render
     return (
       <ImageBackground
@@ -64,9 +62,8 @@ console.log("PROPS IN TIMER",props["route"]["params"]["time"]["minutes"])
                             {text:"YES", 
                              onPress:()=>{
                                  console.log('YES BUTTON'),
-                                //  WebBrowser.openBrowserAsync('https:/google.com')
-                                 navigation.navigate('articles')
-                                } //where it should reroute to Spotify API
+                                 navigation.navigate('selector') //navigates to top headlines
+                                } 
                          }, 
                              {text:'NO',
                              onPress: ()=> {
