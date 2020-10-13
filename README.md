@@ -11,7 +11,6 @@ Enter the number of minutes before your next break, before long you'll be given 
 To add some breaks to your day, simply clone this repo and :
 
 ```shell
-git clone https://github.com/arng0123/Day-Break.git
 npm install
 npm start
 ```
